@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# `.zshenv' is sourced on all invocations of the shell, unless the -f option is
+# set. It should contain commands to set the command search path, plus other
+# important environment variables. `.zshenv' should not contain commands that
+# produce output or assume the shell is attached to a tty.
+# (source: http://zsh.sourceforge.net/Intro/intro_3.html)
+#
+# This is the global `.zshenv' file. It is intended to contain run commands
+# common to all machines. These commands can be overridden on a per-machine
+# basis in the corresponding local `.zshenv' file.
