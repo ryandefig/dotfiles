@@ -9,3 +9,6 @@
 # This is the global `.zshenv' file. It is intended to contain run commands
 # common to all machines. These commands can be overridden on a per-machine
 # basis in the corresponding local `.zshenv' file.
+
+# Make functions directory visible to autoload
+fpath=($DOTFILES_ROOT/functions $fpath)

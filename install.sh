@@ -42,7 +42,7 @@ echo "Done."
 # Configure local files to point to the local dotfiles root.
 # This is the root of the git repository where this install script also lives.
 echo "\nConfiguring dotfile root directory..."
-find ./local/ -type f -exec sed -i '' -e "s~{{dotfiles_root}}~${DOTFILES_ROOT}~g" {} +
+find ./config/local/ -type f -exec sed -i '' -e "s~{{dotfiles_root}}~${DOTFILES_ROOT}~g" {} +
 echo "Done."
 
 # Link runcom files to $HOME
@@ -51,11 +51,11 @@ while true; do
     read -p "[y/n]: " yn
     case $yn in
         [Yy] ) echo "Linking shell startup files to $HOME..."
-            ln -sf $DOTFILES_ROOT/local/runcom/zsh/zshenv $HOME/.zshenv
-            ln -sf $DOTFILES_ROOT/local/runcom/zsh/zprofile $HOME/.zprofile
-            ln -sf $DOTFILES_ROOT/local/runcom/zsh/zshrc $HOME/.zshrc
-            ln -sf $DOTFILES_ROOT/local/runcom/zsh/zlogin $HOME/.zlogin
-            ln -sf $DOTFILES_ROOT/local/runcom/zsh/zlogout $HOME/.zlogout
+            ln -sf $DOTFILES_ROOT/config/local/runcom/zsh/zshenv $HOME/.zshenv
+            ln -sf $DOTFILES_ROOT/config/local/runcom/zsh/zprofile $HOME/.zprofile
+            ln -sf $DOTFILES_ROOT/config/local/runcom/zsh/zshrc $HOME/.zshrc
+            ln -sf $DOTFILES_ROOT/config/local/runcom/zsh/zlogin $HOME/.zlogin
+            ln -sf $DOTFILES_ROOT/config/local/runcom/zsh/zlogout $HOME/.zlogout
             echo "Done."
             break
             ;;
@@ -67,7 +67,7 @@ done
 
 # Ignore local configuration
 echo "\nIsolating local configuration files to this machine..."
-find ./local/ -type f -exec git update-index --skip-worktree {} +
+find ./config/local/ -type f -exec git update-index --skip-worktree {} +
 echo "Done."
 
 # Clean up

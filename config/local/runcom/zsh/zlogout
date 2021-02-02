@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+# `.zlogout' is sourced when login shells exit.
+# (source: http://zsh.sourceforge.net/Intro/intro_3.html)
+#
+# This is the local `.zlogout' file. It is intended to contain run commands
+# applicable only to this machine. These commands will override conflicting
+# commands in the corresponding global `.zlogout' file.
+#
+# $HOME/.zlogout should link to this file.
+
+# Apply global commands
+source $DOTFILES_ROOT'/config/global/runcom/zsh/zlogout'
+
+# Apply local commands. Anything beyond this point should only apply to this
+# machine.
