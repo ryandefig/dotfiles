@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+source $DOTFILES_ROOT"/modules/prompt/$1"

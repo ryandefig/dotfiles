@@ -1,0 +1,76 @@
+#!/usr/bin/env zsh
+
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+zstyle ':vcs_info:git:*' formats '%b'
+VIRTUAL_ENV_DISABLE_PROMPT=1
+
+L_ANGLE="\u276e"
+R_ANGLE="\u276f"
+DOT="\u00b7"
+
+function prompt_dir() {
+    print -n "%F{blue}$L_ANGLE%~$R_ANGLE%f "
+}
+
+function prompt_virtualenv() {
+    if [[ -n $VIRTUAL_ENV ]]; then
+        print -n "%F{magenta}$L_ANGLE$(basename ${VIRTUAL_ENV})$R_ANGLE%f "
+    fi
+}
+
+function prompt_vcs() {
+    local local_ref local_info local_color
+    local remote_ref remote_info remote_color
+    local upstream local_sha remote_sha base_sha
+
+    local_ref="$vcs_info_msg_0_"
+
+    if [[ -n "$local_ref" ]]; then
+        local_info=$local_ref
+        local_color="green"
+
+        if [[ -n "$(git status --porcelain --ignore-submodules)" ]]; then
+            local_color="yellow"
+        fi
+
+        if [[ -n "$(git status | grep "HEAD detached")" ]]; then
+            local_info="(detached) ${ref/.../}"
+        fi
+
+        remote_ref="$(git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD))"
+        if [[ -n $remote_ref ]]; then
+            upstream=${1:-'@{u}'}
+            local_sha=$(git rev-parse @)
+            remote_sha=$(git rev-parse "$upstream")
+            base_sha=$(git merge-base @ "$upstream")
+
+            if [ $local_sha = $remote_sha ]; then
+                remote_color=$local_color
+            elif [ $local_sha = $base_sha ]; then
+                remote_color="red"
+            elif [ $remote_sha = $base_sha ]; then
+                remote_color="cyan"
+            else
+                remote_color="magenta"
+            fi
+
+            remote_info=" %F{${remote_color}}$DOT$DOT$DOT ${remote_ref}$R_ANGLE%f"
+        else
+            remote_color=$local_color
+            remote_info="%F{${remote_color}}$R_ANGLE%f"
+        fi
+
+        local_info="%F{${local_color}}$L_ANGLE${local_info}%f"
+
+        print -n "${local_info}${remote_info}"
+    fi
+}
+
+function prompt_end() {
+    print -n "\n%F{white}$R_ANGLE%f "
+}
+
+export PROMPT=$'$(prompt_virtualenv)$(prompt_dir)$(prompt_vcs)$(prompt_end)'

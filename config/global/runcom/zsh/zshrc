@@ -23,7 +23,7 @@ zstyle ':completion:*' substitute 1
 autoload -Uz compinit
 compinit
 
-autoload set_prompt
+autoload setprompt
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
