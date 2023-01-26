@@ -24,6 +24,7 @@ autoload -Uz compinit
 compinit
 
 autoload setprompt
+setprompt std-prompt
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
