@@ -9,6 +9,3 @@
 # This is the global `.zprofile' file. It is intended to contain run commands
 # common to all machines. These commands can be overridden on a per-machine
 # basis in the corresponding local `.zprofile' file.
-
-# Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
