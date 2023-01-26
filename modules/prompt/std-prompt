@@ -69,8 +69,18 @@ function prompt_vcs() {
     fi
 }
 
-function prompt_end() {
+function prompt_end_no_newline() {
+    print -n " "
+}
+
+function prompt_end_newline() {
     print -n "\n%F{white}$R_ANGLE%f "
 }
 
-export PROMPT=$'$(prompt_virtualenv)$(prompt_dir)$(prompt_vcs)$(prompt_end)'
+# Only one of the following PROMPT definitions should be uncommented.
+
+# Do not add anything to the end of the prompt.
+export PROMPT=$'$(prompt_virtualenv)$(prompt_dir)$(prompt_vcs)$(prompt_end_no_newline)'
+
+# Add a terminal angle bracket on a new line.
+# export PROMPT=$'$(prompt_virtualenv)$(prompt_dir)$(prompt_vcs)$(prompt_end_newline)'
