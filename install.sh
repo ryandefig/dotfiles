@@ -57,6 +57,11 @@ echo "\nIsolating local configuration files to this machine..."
 find ./config/local/ -type f -exec git update-index --skip-worktree {} +
 echo "Done."
 
+# Silence "Last login" terminal message
+echo "\nSilencing \"Last login\" terminal message..."
+touch ~/.hushlogin
+echo "Done."
+
 # Clean up
 unset DOTFILES_ROOT
 
