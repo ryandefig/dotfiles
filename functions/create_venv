@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+root_dir=$PWD
+env_name=$(basename $root_dir)
+
+mkdir $root_dir/.venv
+cd $root_dir/.venv
+python3 -m venv $env_name
+
+cd $root_dir

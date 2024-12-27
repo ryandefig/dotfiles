@@ -35,3 +35,7 @@ bindkey -v
 
 alias ll='ls -lG'
 alias la='ls -alG'
+
+autoload create_venv
+autoload activate_venv
+alias pyactivate='activate_venv'
