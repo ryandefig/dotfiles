@@ -10,7 +10,7 @@ DOTFILES_ROOT=~0 # The current directory is the local repository root
 
 # Set default shell to zsh (homebrew)
 echo "\nVerifying zsh installation..."
-ZSH_INSTALL="/usr/local/bin/zsh"
+ZSH_INSTALL="/opt/homebrew/bin/zsh"
 if [[ -f $ZSH_INSTALL ]]; then
     echo "Zsh (homebrew) is already installed."
 else
