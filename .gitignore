@@ -1,0 +1,13 @@
+# Machine-specific configs
+*.local
+*.local.zsh
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Don't track actual dotfiles in root
+.zshrc.backup
+
+# Avoid leaking personal info
+git/gitconfig

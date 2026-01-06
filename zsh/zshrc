@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+# Main Zsh configuration - sources all modular configs
+
+# Dynamically determine dotfiles directory from this file's location
+# This file is symlinked to ~/.zshrc, so we resolve the symlink to find the repo
+if [[ -L ~/.zshrc ]]; then
+  # Follow the symlink to find the actual file location
+  DOTFILES_ZSHRC="$(readlink ~/.zshrc)"
+  # Get the directory containing zshrc (the zsh/ directory)
+  DOTFILES_ZSH_DIR="$(cd "$(dirname "$DOTFILES_ZSHRC")" && pwd)"
+  # Go up one level to get the dotfiles root
+  export DOTFILES="$(dirname "$DOTFILES_ZSH_DIR")"
+else
+  # Fallback if not symlinked (shouldn't happen with our install script)
+  export DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+fi
+
+# Load modular configurations in order
+if [[ -d "$DOTFILES/zsh" ]]; then
+  for config in env history completion aliases functions prompt; do
+    config_file="$DOTFILES/zsh/${config}.zsh"
+    if [[ -f "$config_file" ]]; then
+      source "$config_file"
+    fi
+  done
+  
+  # Load local environment overrides (gitignored)
+  [[ -f "$DOTFILES/zsh/env.local.zsh" ]] && source "$DOTFILES/zsh/env.local.zsh"
+fi
+
+# Machine-specific configuration (gitignored, in home directory)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

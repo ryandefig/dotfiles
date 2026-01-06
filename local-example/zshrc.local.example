@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+# Machine-specific Zsh configuration
+# This file is NOT tracked in git
+# Copy to ~/.zshrc.local and customize
+
+# ============================================================================
+# Machine-Specific Aliases
+# ============================================================================
+# Example: alias to connect to work VPN
+# alias work-vpn='sudo openvpn --config ~/vpn/work.ovpn'
+
+# Example: SSH shortcuts
+# alias work-server='ssh user@work-server.com'
+# alias personal-server='ssh user@personal-server.com'
+
+# Example: Project shortcuts
+# alias myproject='cd ~/dev/src/myorg/my-important-project'
+
+# ============================================================================
+# Secrets and API Keys
+# ============================================================================
+# Example: Export sensitive environment variables
+# export GITHUB_TOKEN="your_token_here"
+# export AWS_ACCESS_KEY_ID="your_key_here"
+# export AWS_SECRET_ACCESS_KEY="your_secret_here"
+# export OPENAI_API_KEY="your_key_here"
+
+# ============================================================================
+# Work-Specific Configuration
+# ============================================================================
+# Example: Work proxy settings
+# export HTTP_PROXY="http://proxy.work.com:8080"
+# export HTTPS_PROXY="http://proxy.work.com:8080"
+
+# Example: Corporate CA certificates
+# export SSL_CERT_FILE="/usr/local/share/ca-certificates/corporate-ca.crt"
+
+# ============================================================================
+# Machine-Specific PATH Additions
+# ============================================================================
+# Example: Add local tools
+# export PATH="$HOME/tools/custom-tool/bin:$PATH"
+
+# ============================================================================
+# Custom Functions for This Machine
+# ============================================================================
+# Example: Quick backup function for this machine
+# backup-to-nas() {
+#   rsync -avz "$1" nas.local:/backups/
+# }
+
+# ============================================================================
+# Notes
+# ============================================================================
+# This file is perfect for:
+# - API keys and tokens
+# - Machine-specific paths
+# - Work vs personal computer differences
+# - Sensitive information that shouldn't be in git
+# - Experimental aliases you're testing
