@@ -1,0 +1,27 @@
+[light]
+background = "#fff8e7"
+foreground = "#202a31"
+cursor = { background = "#e39725", foreground = "#fff8e7" }
+selection = { background = "#202a31", foreground = "#fff8e7" }
+black = "#202a31"
+red = "#b03d30"
+green = "#56a347"
+yellow = "#d6a700"
+blue = "#589fc9"
+magenta = "#8560c0"
+cyan = "#62c7c5"
+white = "#c2b490"
+
+[dark]
+background = "#202a31"
+foreground = "#fff8e7"
+cursor = { background = "#e39725", foreground = "#202a31" }
+selection = { background = "#fff8e7", foreground = "#202a31" }
+black = "#0a1116"
+red = "#e76767"
+green = "#69d674"
+yellow = "#ffff60"
+blue = "#589fc9"
+magenta = "#ac8bc7"
+cyan = "#62c7c5"
+white = "#fff8e7"
