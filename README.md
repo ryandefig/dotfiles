@@ -32,13 +32,20 @@ cp local-example/env.local.example zsh/env.local.zsh
 ## Customization
 
 Edit files in `zsh/` directory and changes will take effect after:
-```bash
+```zsh
 source ~/.zshrc
+```
+
+`~/.zshrc` is a Zsh configuration and must be sourced from a Zsh session. If
+Zsh is not installed, install it with your operating system's package manager,
+then start it with:
+```bash
+exec zsh
 ```
 
 ## Updating
 ```bash
 cd ~/.dotfiles
 git pull
-source ~/.zshrc
+exec zsh
 ```
