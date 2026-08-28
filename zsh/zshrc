@@ -20,17 +20,19 @@ else
   export DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
 fi
 
-# Load modular configurations in order
+# Load portable environment settings first.
 if [[ -d "$DOTFILES/zsh" ]]; then
-  for config in env history completion aliases functions prompt; do
+  [[ -f "$DOTFILES/zsh/env.zsh" ]] && source "$DOTFILES/zsh/env.zsh"
+
+  # Machine-local environment can select or configure later modules.
+  [[ -f "$DOTFILES/zsh/env.local.zsh" ]] && source "$DOTFILES/zsh/env.local.zsh"
+
+  for config in history completion aliases functions prompt; do
     config_file="$DOTFILES/zsh/${config}.zsh"
     if [[ -f "$config_file" ]]; then
       source "$config_file"
     fi
   done
-  
-  # Load local environment overrides (gitignored)
-  [[ -f "$DOTFILES/zsh/env.local.zsh" ]] && source "$DOTFILES/zsh/env.local.zsh"
 fi
 
 # Machine-specific configuration (gitignored, in home directory)
