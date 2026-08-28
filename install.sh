@@ -31,6 +31,9 @@ create_symlink() {
 # Zsh configuration
 echo ""
 echo "📝 Setting up Zsh..."
+if ! command -v zsh >/dev/null 2>&1; then
+  echo "  ! Zsh is not installed; install it before starting a Zsh session"
+fi
 backup_if_exists "$HOME/.zshrc"
 create_symlink "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 
@@ -69,8 +72,9 @@ echo ""
 echo "✨ Installation complete!"
 echo ""
 echo "📌 Next steps:"
-echo "   1. Edit ~/.zshrc.local for machine-specific configs"
-echo "   2. Edit ~/.dotfiles/git/gitconfig with your name and email"
-echo "   3. Reload your shell: source ~/.zshrc"
+echo "   1. Start Zsh with: exec zsh (install Zsh first if needed)"
+echo "   2. Edit ~/.zshrc.local for machine-specific configs"
+echo "   3. Edit ~/.dotfiles/git/gitconfig with your name and email"
+echo "   4. Reload from Zsh with: source ~/.zshrc"
 echo ""
 echo "💡 Tip: Files ending in .local are gitignored for secrets/machine-specific configs"

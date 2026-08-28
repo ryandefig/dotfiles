@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 # Main Zsh configuration - sources all modular configs
 
+# Do not evaluate this file when it is accidentally sourced by another shell.
+if [ -z "${ZSH_VERSION:-}" ]; then
+  return 0 2>/dev/null || exit 0
+fi
+
 # Dynamically determine dotfiles directory from this file's location
 # This file is symlinked to ~/.zshrc, so we resolve the symlink to find the repo
 if [[ -L ~/.zshrc ]]; then
