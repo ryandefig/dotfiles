@@ -1,14 +1,22 @@
 #!/usr/bin/env zsh
 # Completion system configuration
 
+# Remove directories repeatedly added by login-shell and Homebrew setup.
+typeset -gU path fpath
+
 # Load completion system
 autoload -Uz compinit
 
 # Only regenerate compdump once per day for performance
-if [[ -n ~/.zcompdump(#qNmh+24) ]]; then
-  compinit
+zmodload zsh/datetime
+zmodload zsh/stat
+typeset -g ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+
+if [[ ! -s "$ZSH_COMPDUMP" ]] ||
+  (( EPOCHSECONDS - $(zstat +mtime "$ZSH_COMPDUMP") > 86400 )); then
+  compinit -d "$ZSH_COMPDUMP"
 else
-  compinit -C
+  compinit -C -d "$ZSH_COMPDUMP"
 fi
 
 # Completion options

@@ -220,6 +220,3 @@ functions[TRAPCHLD]="${functions[dotfiles_apollo_trapchld]}"
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 typeset -g PROMPT='$(dotfiles_apollo_prompt)'
 typeset -g RPROMPT='$(dotfiles_apollo_rprompt)'
-
-# Populate repository state before the first command is run.
-dotfiles_apollo_git
