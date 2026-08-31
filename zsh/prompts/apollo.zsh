@@ -200,6 +200,7 @@ dotfiles_apollo_prompt() {
   print -nr -- $'\n'
   dotfiles_apollo_status && print -nr -- $'\n'
   dotfiles_apollo_environment
+  print -nr -- " "
   print -nr -- "%F{white}%B❯%b%f "
 }
 
