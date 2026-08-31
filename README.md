@@ -38,8 +38,10 @@ source ~/.zshrc
 
 ### Prompt themes
 
-The default `apollo` prompt shows the working directory, Git state, active
-development environments, command duration, exit status, jobs, and time.
+The default three-line `apollo` prompt shows the working directory and Git
+state, left-aligned command metadata, and a clean input line. Its metadata
+starts with time and active development environments, followed by command
+duration, exit status, and jobs.
 
 Switch themes for the current session:
 ```zsh
