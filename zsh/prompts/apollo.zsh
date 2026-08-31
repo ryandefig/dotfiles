@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Apollo: a dependency-free, three-line prompt tuned for the Apollo terminal theme.
+# Apollo: a dependency-free, adaptive prompt tuned for the Apollo terminal theme.
 
 autoload -Uz add-zsh-hook
 zmodload zsh/datetime 2>/dev/null
@@ -162,26 +162,32 @@ dotfiles_apollo_environment() {
   fi
 }
 
-dotfiles_apollo_metadata() {
-  dotfiles_apollo_segment clock 240 white "%D{%H:%M}"
-  dotfiles_apollo_environment
-  if [[ -n "$DOTFILES_APOLLO_DURATION" ]]; then
-    dotfiles_apollo_segment duration yellow black "$DOTFILES_APOLLO_DURATION"
-  fi
-  if (( DOTFILES_APOLLO_EXIT_STATUS != 0 )); then
-    dotfiles_apollo_segment error red black "exit ${DOTFILES_APOLLO_EXIT_STATUS}"
-  fi
+dotfiles_apollo_status() {
+  local rendered=0
+
   if (( DOTFILES_APOLLO_JOB_COUNT )); then
     local job_label="jobs"
     (( DOTFILES_APOLLO_JOB_COUNT == 1 )) && job_label="job"
     dotfiles_apollo_segment jobs cyan black \
       "${DOTFILES_APOLLO_JOB_COUNT} ${job_label}"
+    rendered=1
   fi
+  if (( DOTFILES_APOLLO_EXIT_STATUS != 0 )); then
+    dotfiles_apollo_segment error red black "exit ${DOTFILES_APOLLO_EXIT_STATUS}"
+    rendered=1
+  fi
+  if [[ -n "$DOTFILES_APOLLO_DURATION" ]]; then
+    dotfiles_apollo_segment duration yellow black "$DOTFILES_APOLLO_DURATION"
+    rendered=1
+  fi
+
+  (( rendered ))
 }
 
 dotfiles_apollo_prompt() {
   local context="$(dotfiles_apollo_context)"
 
+  dotfiles_apollo_segment clock 240 51 "%D{%H:%M}"
   dotfiles_apollo_segment context 240 white "$context"
   dotfiles_apollo_segment directory blue black "%~"
   if [[ -n "$DOTFILES_APOLLO_GIT" ]]; then
@@ -192,8 +198,8 @@ dotfiles_apollo_prompt() {
     fi
   fi
   print -nr -- $'\n'
-  dotfiles_apollo_metadata
-  print -nr -- $'\n'
+  dotfiles_apollo_status && print -nr -- $'\n'
+  dotfiles_apollo_environment
   print -nr -- "%F{white}%B❯%b%f "
 }
 
@@ -221,6 +227,3 @@ functions[TRAPCHLD]="${functions[dotfiles_apollo_trapchld]}"
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 typeset -g PROMPT='$(dotfiles_apollo_prompt)'
 typeset -g RPROMPT=''
-
-# Populate repository state before the first command is run.
-dotfiles_apollo_git
