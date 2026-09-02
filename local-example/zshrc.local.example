@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 # Machine-specific Zsh configuration
 # This file is NOT tracked in git
-# Copy to ~/.zshrc.local and customize
+# Copy to ~/.dotfiles/zsh/zshrc.local.zsh and customize
+# ~/.zshrc.local should be a symlink to that file
 
 # ============================================================================
 # Machine-Specific Aliases

@@ -46,16 +46,27 @@ cp "$DOTFILES_DIR/git/gitconfig.example" "$DOTFILES_DIR/git/gitconfig"
 create_symlink "$DOTFILES_DIR/git/gitconfig" "$HOME/.gitconfig"
 create_symlink "$DOTFILES_DIR/git/gitignore.global" "$HOME/.gitignore.global"
 
-# Create local config examples if they don't exist
+# Create local configs in the repository so they remain easy to manage while
+# staying gitignored. Home-directory entry points are symlinked to them.
 echo ""
 echo "📄 Setting up local config examples..."
-if [[ ! -f "$HOME/.zshrc.local" ]]; then
-  echo "  ℹ️  Creating ~/.zshrc.local from example"
-  cp "$DOTFILES_DIR/local-example/zshrc.local.example" "$HOME/.zshrc.local"
-  echo "  ✓ Created ~/.zshrc.local (customize as needed)"
+LOCAL_ZSHRC="$DOTFILES_DIR/zsh/zshrc.local.zsh"
+
+if [[ ! -f "$LOCAL_ZSHRC" ]]; then
+  if [[ -f "$HOME/.zshrc.local" ]] && [[ ! -L "$HOME/.zshrc.local" ]]; then
+    echo "  ℹ️  Moving existing ~/.zshrc.local to zsh/zshrc.local.zsh"
+    mv "$HOME/.zshrc.local" "$LOCAL_ZSHRC"
+  else
+    echo "  ℹ️  Creating zsh/zshrc.local.zsh from example"
+    cp "$DOTFILES_DIR/local-example/zshrc.local.example" "$LOCAL_ZSHRC"
+  fi
+  echo "  ✓ Created zsh/zshrc.local.zsh (customize as needed)"
 else
-  echo "  ℹ️  ~/.zshrc.local already exists (not overwriting)"
+  echo "  ℹ️  zsh/zshrc.local.zsh already exists (not overwriting)"
 fi
+
+backup_if_exists "$HOME/.zshrc.local"
+create_symlink "$LOCAL_ZSHRC" "$HOME/.zshrc.local"
 
 if [[ ! -f "$DOTFILES_DIR/zsh/env.local.zsh" ]]; then
   echo "  ℹ️  Creating zsh/env.local.zsh from example"
