@@ -20,13 +20,14 @@ cd ~/.dotfiles
 
 Create these files for machine-specific overrides (they're gitignored):
 
-- `~/.zshrc.local` - Shell overrides, secrets, machine-specific aliases
+- `~/.dotfiles/zsh/zshrc.local.zsh` - Shell overrides, secrets, machine-specific aliases
 - `~/.dotfiles/zsh/env.local.zsh` - Additional environment variables
 
-Copy from examples:
+Copy from examples and link the Zsh entry point:
 ```bash
-cp local-example/zshrc.local.example ~/.zshrc.local
+cp local-example/zshrc.local.example zsh/zshrc.local.zsh
 cp local-example/env.local.example zsh/env.local.zsh
+ln -s ~/.dotfiles/zsh/zshrc.local.zsh ~/.zshrc.local
 ```
 
 ## Customization
