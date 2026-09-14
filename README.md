@@ -40,9 +40,10 @@ source ~/.zshrc
 ### Prompt themes
 
 The default `apollo` prompt shows time, user and host, working directory, and
-Git state on its first line. Jobs, failures, and command duration add a
-conditional status line, while active development environments appear beside
-the command prompt.
+Git state on its first line. When the current branch tracks an upstream branch,
+both are shown as `git:local → remote/branch`. Jobs, failures, and command
+duration add a conditional status line, while active development environments
+appear beside the command prompt.
 
 Switch themes for the current session:
 ```zsh

@@ -63,7 +63,7 @@ dotfiles_apollo_trapchld() {
 }
 
 dotfiles_apollo_git() {
-  local git_status line branch="" divergence="" stash=0
+  local git_status line branch="" upstream="" divergence="" stash=0
   local stash_header=0
   local staged=0 modified=0 untracked=0 ahead=0 behind=0
 
@@ -77,6 +77,9 @@ dotfiles_apollo_git() {
     case "$line" in
       '# branch.head '*)
         branch="${line#\# branch.head }"
+        ;;
+      '# branch.upstream '*)
+        upstream="${line#\# branch.upstream }"
         ;;
       '# branch.ab '*)
         divergence="${line#\# branch.ab }"
@@ -108,11 +111,13 @@ dotfiles_apollo_git() {
     branch="@$(command git rev-parse --short HEAD 2>/dev/null)"
   fi
   branch="$(dotfiles_apollo_escape "$branch")"
+  upstream="$(dotfiles_apollo_escape "$upstream")"
 
   DOTFILES_APOLLO_GIT_STATE="clean"
   (( staged || modified || untracked )) && DOTFILES_APOLLO_GIT_STATE="dirty"
 
   DOTFILES_APOLLO_GIT="git:$branch"
+  [[ -n "$upstream" ]] && DOTFILES_APOLLO_GIT+=" → $upstream"
   (( staged )) && DOTFILES_APOLLO_GIT+=" │ +"
   (( modified )) && DOTFILES_APOLLO_GIT+=" │ *"
   (( untracked )) && DOTFILES_APOLLO_GIT+=" │ ?"
