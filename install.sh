@@ -19,11 +19,11 @@ backup_if_exists() {
 create_symlink() {
   local src=$1
   local dest=$2
-  
+
   if [[ -L "$dest" ]]; then
     rm "$dest"
   fi
-  
+
   ln -sf "$src" "$dest"
   echo "  ✓ Linked $dest"
 }
