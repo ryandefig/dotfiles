@@ -37,3 +37,4 @@ fi
 
 # Machine-specific configuration (gitignored, in home directory)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
