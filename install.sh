@@ -37,6 +37,25 @@ fi
 backup_if_exists "$HOME/.zshrc"
 create_symlink "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 
+# The fzf module enables Ctrl-R history search when fzf supports --zsh.
+echo ""
+echo "Setting up fzf history search..."
+if ! command -v fzf >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    echo "  Installing fzf with Homebrew..."
+    brew install fzf
+  else
+    echo "  ! fzf is not installed; install fzf to enable Ctrl-R history search"
+  fi
+fi
+if command -v fzf >/dev/null 2>&1; then
+  if fzf --zsh >/dev/null 2>&1; then
+    echo "  fzf Ctrl-R history search is ready"
+  else
+    echo "  ! This version of fzf does not support --zsh; upgrade fzf to enable Ctrl-R history search"
+  fi
+fi
+
 # Git configuration
 echo ""
 echo "🔧 Setting up Git..."

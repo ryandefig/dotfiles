@@ -27,7 +27,7 @@ if [[ -d "$DOTFILES/zsh" ]]; then
   # Machine-local environment can select or configure later modules.
   [[ -f "$DOTFILES/zsh/env.local.zsh" ]] && source "$DOTFILES/zsh/env.local.zsh"
 
-  for config in history completion aliases functions prompt; do
+  for config in history completion fzf aliases functions prompt; do
     config_file="$DOTFILES/zsh/${config}.zsh"
     if [[ -f "$config_file" ]]; then
       source "$config_file"
@@ -37,4 +37,3 @@ fi
 
 # Machine-specific configuration (gitignored, in home directory)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-

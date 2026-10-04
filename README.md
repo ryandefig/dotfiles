@@ -9,6 +9,11 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
+The installer sets up fzf for Ctrl-R Zsh history search. It installs fzf through
+Homebrew when available; on other systems, install a version that supports
+`fzf --zsh` with your package manager. The search colors are configured in
+`zsh/fzf.zsh`.
+
 ## Structure
 
 - `zsh/` - Zsh shell configuration (modular)
